@@ -1,0 +1,60 @@
+<div class="container">
+  <form autocomplete="off" #paisForm="ngForm" (ngSubmit)="salvar(paisForm)">
+
+    <div class="grid">
+      <div class="col-12">
+        <h1>{{ editando ? 'Edição do' : 'Novo' }} País</h1>
+      </div>
+
+      <div class="col-6 p-fluid">
+        <label>Nome</label>
+        <input pInputText class="p-inputtext-sm" type="text" name="nome"
+        ngModel #nome="ngModel" required minlength="5" [(ngModel)]="pais.nome">
+
+        <app-message [control]="nome" error="required"
+          text="Informe um nome"></app-message>
+        <app-message [control]="nome" error="minlength"
+          text="Mínimo de {{ nome.errors?.minlength?.requiredLength }} caracteres. Você digitou apenas {{ nome.errors?.minlength?.actualLength }}"></app-message>
+      </div>
+
+      <div class="col-6 p-fluid">
+        <label>Capital</label>
+        <input pInputText class="p-inputtext-sm" type="text" name="capital"
+          ngModel  #capital="ngModel" required [(ngModel)]="pais.capital">
+
+        <app-message [control]="capital" error="required"
+          text="Informe a capital"></app-message>
+      </div>
+
+      <div class="col-6 md-12 p-fluid">
+        <label>Região</label>
+        <input pInputText class="p-inputtext-sm" type="text" name="regiao"
+        ngModel  #regiao="ngModel" required [(ngModel)]="pais.regiao">
+
+        <app-message [control]="regiao" error="required"
+          text="Informe a capital"></app-message>
+      </div>
+
+      <div class="col-6 md-12 p-fluid">
+        <label>Sub-Região</label>
+        <input pInputText type="text" name="subregiao"  class="p-inputtext-sm"
+        ngModel  #subregiao="ngModel" required [(ngModel)]="pais.subRegiao">
+
+        <app-message [control]="subregiao" error="required"
+          text="Informe a capital"></app-message>
+      </div>
+
+      <div class="col-3 md-12 p-fluid">
+        <label>Área</label>
+        <input pInputText class="p-inputtext-sm" type="text" placeholder="0,00"
+          ngModel name="area" #area="ngModel" required [(ngModel)]="pais.area">
+      </div>
+
+      <div class="col-12">
+        <button pButton type="submit" label="Salvar" [disabled]="paisForm.invalid" class="p-button-sm" style="height: 30px; border-color: #5E81AC; background-color: #5E81AC;"></button>
+        <button pButton (click)="novo(paisForm)" type="button" label="Novo" class="p-button-info p-button-sm" style="height: 30px; background-color: #607d8b; border-style: none;"></button>
+        <a routerLink="/paises">Voltar para a pesquisa</a>
+      </div>
+    </div>
+  </form>
+</div>

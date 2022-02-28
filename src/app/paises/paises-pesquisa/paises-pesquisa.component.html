@@ -1,0 +1,59 @@
+<div class="container">
+  <form autocomplete="off" (ngSubmit)="pesquisar()">
+    <div class="grid">
+
+      <div class="col-12">
+        <h1>Países</h1>
+      </div>
+
+      <div class="col-12 p-fluid">
+        <label>Nome</label>
+        <input pInputText [(ngModel)]="filtro.nome" name="nome" type="text" class="p-inputtext-sm">
+      </div>
+
+      <div class="col-12">
+        <button pButton type="submit" label="Pesquisar" class="p-button-sm"></button>
+      </div>
+    </div>
+  </form>
+  <div class="grid">
+    <div class="col-12">
+      <p-table [value]="paises" [responsive]="true" [paginator]="true" (onLazyLoad)="aoMudarPagina($event)"
+       [rows]="filtro.itensPorPagina" [lazy]="true" [totalRecords]="totalRegistros"
+        styleClass="p-datatable-sm p-datatable-gridlines" #tabela>
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Nome</th>
+            <th>Capital</th>
+            <th class="col-data-header">Região</th>
+            <th class="col-data-header">Sub-Região</th>
+            <th class="col-valor-header">Área</th>
+            <th class="col-valor-header">Ações</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-pais>
+          <tr>
+            <td>{{ pais.nome }}</td>
+            <td>{{ pais.capital }}</td>
+            <td class="col-data-content">{{ pais.regiao }}</td>
+            <td class="col-data-content">{{ pais.subRegiao }}</td>
+            <td class="col-valor-content">{{ pais.area }}</td>
+            <td class="col-acoes">
+              <a pButton icon="pi pi-pencil" [routerLink]="['/paises', pais.id]" pTooltip="Editar" tooltipPosition="top" type="button" class="" style="border-style: none;"></a>
+              <button pButton (click)="confirmarExclusao(pais)" icon="pi pi-trash" pTooltip="Excluir" tooltipPosition="top" class="" style="border-style: none;">
+            </button>
+            </td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+          <tr>
+            <td colspan="6">
+              Nenhum país encontrado
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+  <a pButton routerLink="/paises/novo" class="p-button-sm" label="Novo pais" style="height: 30px; background-color: #607d8b; border-style: none;"></a>
+</div>
