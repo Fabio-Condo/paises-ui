@@ -56,7 +56,7 @@ export class PaisesPesquisaComponent implements OnInit {
   }
 
   aoMudarPagina(event: LazyLoadEvent) {
-    const pagina = event!.first! / event!.rows!;  // Calculando a mutacao de paginas. (Pagina zero/5 elementos por pagina)=0, logo mostra pagina zero, 5/5=1, mostra pagina 1. Entao sera 0,1,2,3,4 elementos pertence a pagina zero, 5,6,7,8,9 pertence a pagina 1, etc
+    const pagina = event!.first! / event!.rows!;  
     this.pesquisar(pagina);
   }
 
